@@ -1,4 +1,4 @@
-# MM's Site
+# My Site
 
 This project is a React-based portfolio site, migrated to [Vite](https://vitejs.dev/) for a fast and secure development experience.
 
@@ -45,4 +45,4 @@ The optimized static assets will be output to the `dist` or `build` folder, read
 
 ## Deployment
 
-This repository is configured with a GitHub Actions workflow (`.github/workflows/deploy.yml`) to automatically build and deploy the site to GitHub Pages whenever changes are pushed to the `release` branch.
+This repository is configured with a GitHub Actions workflow (`.github/workflows/release.yml`) to automatically build and deploy the site to GitHub Pages whenever changes are pushed to the `main` branch.
