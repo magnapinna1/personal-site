@@ -1,6 +1,9 @@
 name: Build and push personal site to GH pages
 run-name: ${{ github.actor }} deploying site
+
 on:
+  repository_dispatch: 
+    types: [private-content-update]
   push:
     branches:
       - main
