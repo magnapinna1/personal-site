@@ -1,0 +1,270 @@
+/* ----------------------------------------
+   INDIVIDUAL BLOG POST PAGE
+   ---------------------------------------- */
+.post-page-wrapper {
+    position: relative;
+    width: 100vw;
+    min-height: 100vh;
+    background: #0a0c14;
+    display: block;
+    overflow-y: visible;
+}
+
+/* Dark nebula background */
+.post-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+    background: linear-gradient(to bottom,
+        #0a0c14 0%,
+        #0e1220 40%,
+        #12162a 70%,
+        #0a0c14 100%);
+}
+
+.post-nebula {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.4;
+}
+
+.nebula-1 {
+    width: 80vw; height: 50vh;
+    top: 10%; left: -10%;
+    background: radial-gradient(ellipse, rgba(60, 40, 100, 0.3) 0%, transparent 65%);
+    animation: nebulaShift1 50s ease-in-out infinite alternate;
+}
+
+.nebula-2 {
+    width: 60vw; height: 45vh;
+    bottom: 5%; right: -5%;
+    background: radial-gradient(ellipse, rgba(30, 50, 90, 0.25) 0%, transparent 65%);
+    animation: nebulaShift2 60s ease-in-out infinite alternate;
+}
+
+@keyframes nebulaShift1 {
+    0%   { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(5vw, 3vh) scale(1.05); }
+}
+
+@keyframes nebulaShift2 {
+    0%   { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-4vw, -2vh) scale(1.04); }
+}
+
+.post-grain {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+}
+
+/* Back link */
+.back-link {
+    display: inline-block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-bottom: 3rem;
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: var(--text-main);
+}
+
+/* Post article */
+.post-article {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.post-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.post-meta-date {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.post-full-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--text-main);
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+}
+
+.post-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.post-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    color: var(--text-muted);
+}
+
+/* Post body — markdown rendered content */
+.post-body {
+    color: var(--text-main);
+    font-size: 1.05rem;
+    line-height: 1.9;
+    opacity: 0.85;
+}
+
+.post-body h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    margin: 2.5rem 0 1rem;
+    color: var(--text-main);
+    opacity: 0.95;
+}
+
+.post-body h3 {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 2rem 0 0.8rem;
+    color: var(--text-muted);
+}
+
+.post-body p {
+    margin-bottom: 1.2rem;
+}
+
+.post-body strong {
+    color: var(--text-main);
+    font-weight: 400;
+    opacity: 1;
+}
+
+.post-body em {
+    font-style: italic;
+    opacity: 0.9;
+}
+
+.post-body ul, .post-body ol {
+    margin: 1rem 0 1.5rem 1.5rem;
+}
+
+.post-body li {
+    margin-bottom: 0.5rem;
+}
+
+.post-body code {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85em;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: var(--jelly-core);
+}
+
+.post-body pre {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+}
+
+.post-body pre code {
+    background: none;
+    padding: 0;
+    color: var(--text-main);
+    opacity: 0.8;
+}
+
+.post-body blockquote {
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
+    margin: 1.5rem 0;
+    padding: 0.5rem 0 0.5rem 1.2rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* Related posts section */
+.related-section {
+    max-width: 720px;
+    margin: 4rem auto 0;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.related-heading {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+}
+
+.related-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.related-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+}
+
+.related-date {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+}
+
+.related-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: var(--text-main);
+    margin: 8px 0;
+}
+
+.related-excerpt {
+    font-size: 0.85rem;
+    color: var(--text-main);
+    opacity: 0.5;
+    line-height: 1.6;
+}

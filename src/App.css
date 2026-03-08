@@ -1,0 +1,285 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@200;300;400&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --bg-sky: #13171c;
+  --bg-mid: #0a0e12;
+  --bg-deep: #050709;
+  --wave-color: #2a3b3a;
+  --sea-green: #3dcfa8;
+
+  --text-main: #dfddd4;
+  --text-muted: #83857e;
+
+  --glass-bg: rgba(10, 15, 13, 0.4);
+  --glass-border: rgba(131, 133, 126, 0.1);
+
+  /* Bioluminescence Colors */
+  --jelly-core: #bcfaff;
+  --jelly-glow: #6ab5ff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+  line-height: 1.8;
+  font-weight: 300;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* ----------------------------------------
+   LAYOUT SHELL
+   ---------------------------------------- */
+.app-root {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: var(--bg-deep);
+  overflow: hidden;
+}
+
+.page-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.page-section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease-in-out;
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 1;
+}
+
+.page-section.active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 10;
+}
+
+/* Cinematic blur-in overlay */
+.page-section::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(5, 7, 9, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.page-section.active::before {
+  opacity: 0;
+}
+
+#home {
+  background-color: var(--bg-deep);
+}
+
+#projects {
+  background-color: #2e3033;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Faint pulsing yellow gradient in the middle of Projects page */
+#projects::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80vw;
+  height: 80vh;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse, rgba(255, 230, 150, 0.04) 0%, rgba(200, 180, 100, 0.01) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  animation: pulseGlow 8s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+  0% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.95); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+}
+
+#blog {
+  background-color: #08090f;
+}
+
+/* ----------------------------------------
+   EFFECTS TOGGLE — Minimal Pill
+   ---------------------------------------- */
+.effects-toggle {
+  position: fixed;
+  top: 28px;
+  left: 36px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.35);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  z-index: 1000 !important;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  backdrop-filter: blur(4px);
+  pointer-events: auto !important;
+  opacity: 1;
+}
+
+.effects-toggle:hover {
+  color: rgba(255, 255, 255, 0.7);
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* ----------------------------------------
+   SHARED CONTENT LAYERS
+   ---------------------------------------- */
+.section-content {
+  position: relative;
+  z-index: 100;
+  max-width: 1200px;
+  width: 95%;
+  padding: 15vh 40px;
+  margin: 0 auto;
+  color: var(--text-main);
+  pointer-events: auto;
+}
+
+.full-screen-scroll {
+  height: auto;
+  overflow-y: visible;
+  padding-bottom: 25vh;
+}
+
+.blog-post-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 40px;
+  margin-bottom: 40px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.blog-post-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-5px);
+}
+
+.post-date {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+}
+
+.post-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
+  color: var(--text-main);
+  margin: 10px 0;
+  line-height: 1.2;
+}
+
+.post-excerpt {
+  font-size: 1rem;
+  color: var(--text-main);
+  opacity: 0.8;
+  line-height: 1.6;
+}
+
+.page-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem;
+  letter-spacing: 4px;
+  margin-bottom: 3rem;
+  opacity: 0.9;
+  color: var(--text-main);
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+/* ----------------------------------------
+   MEDIA QUERIES & THEMES
+   ---------------------------------------- */
+@media (max-width: 768px) {
+  .card-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .header-group {
+    align-items: center;
+  }
+
+  .links-nav {
+    justify-content: center;
+  }
+
+  .skills-list {
+    justify-content: center;
+  }
+
+  .name-title {
+    font-size: 3rem;
+  }
+
+  .page-title {
+    font-size: 2.2rem;
+  }
+
+  .side-nav {
+    right: 20px;
+  }
+
+  .section-content {
+    padding: 0 20px;
+  }
+}
+
+/* Theme-specific variables for navigation contrast */
+.theme-blog {
+  --theme-nav-text: var(--text-muted);
+  --theme-nav-dot: var(--text-muted);
+}
+
+.theme-blog .nav-item:hover .nav-label {
+  opacity: 0.7;
+}
+
+.theme-blog .effects-toggle {
+  border-color: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.theme-blog .effects-toggle:hover {
+  color: rgba(255, 255, 255, 0.6);
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.03);
+}

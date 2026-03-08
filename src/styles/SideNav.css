@@ -1,0 +1,69 @@
+/* ----------------------------------------
+   SIDE NAVIGATION — Minimal Line Style
+   ---------------------------------------- */
+.side-nav {
+    position: fixed;
+    right: 36px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: flex-end;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    z-index: 110;
+    padding: 12px 0;
+    position: relative;
+}
+
+.nav-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--theme-nav-text, var(--text-muted));
+    opacity: 0;
+    transform: translateX(8px);
+    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    pointer-events: none;
+}
+
+.nav-dot {
+    width: 2px;
+    height: 16px;
+    background: var(--theme-nav-dot, var(--text-muted));
+    border-radius: 1px;
+    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    opacity: 0.3;
+}
+
+.nav-item:hover .nav-label {
+    opacity: 0.5;
+    transform: translateX(0);
+}
+
+.nav-item:hover .nav-dot {
+    opacity: 0.6;
+    height: 20px;
+}
+
+.nav-item.active .nav-dot {
+    background: var(--sea-green);
+    box-shadow: 0 0 8px var(--sea-green);
+    height: 24px;
+    opacity: 1;
+    width: 2px;
+}
+
+.nav-item.active .nav-label {
+    opacity: 0.9;
+    color: var(--text-main);
+    transform: translateX(0);
+}
