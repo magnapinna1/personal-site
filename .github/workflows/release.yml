@@ -9,7 +9,7 @@ on:
       - main
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -27,8 +27,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
         with:
-          submodules: true
           token: ${{ secrets.PAT_TOKEN_PRIVATE_CONTENT }}
+          submodules: true
+          # We need to fetch all history for the auto-commit action to work
+          fetch-depth: 0
+      - name: Update Submodule to Latest
+        run: |
+          git submodule update --remote --merge
+      - name: Commit Submodule Update
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: auto-update private content submodule commit hash"
+          file_pattern: src/private-content
       - name: Build
         run: |
           npm install
