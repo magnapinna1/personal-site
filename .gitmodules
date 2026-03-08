@@ -1,3 +1,4 @@
 [submodule "src/private-content"]
 	path = src/private-content
 	url = https://github.com/magnapinna1/site-private-content.git
+	branch = main
