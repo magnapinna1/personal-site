@@ -37,7 +37,7 @@ jobs:
       - name: Commit Submodule Update
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore: auto-update private content submodule commit hash"
+          commit_message: "chore: auto-update private content submodule commit hash [skip ci]"
           file_pattern: src/private-content
       - name: Build
         run: |
