@@ -124,7 +124,7 @@ const HomePage = ({ effectsOn, mousePos }) => (
           <div className="left-column">
             <div className="profile-frame"><img src="./20230328_152422.jpg" alt="Profile Pic" className="profile-pic" /></div>
             <nav className="links-nav">
-              <a href="#github" className="nav-link">Github</a>
+              <a href="https://github.com/magnapinna1" className="nav-link">Github</a>
               <a href="https://www.linkedin.com/in/michael-morrill-591736177/" className="nav-link">LinkedIn</a>
               <a href="mailto:mmorrill99@gmail.com" className="nav-link">Email</a>
             </nav>
