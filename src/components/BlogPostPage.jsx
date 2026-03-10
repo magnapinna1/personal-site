@@ -67,7 +67,7 @@ const BlogPostPage = ({ effectsOn }) => {
         <div className="post-grain"></div>
       </div>
       <div className="section-content full-screen-scroll">
-        <Link to="/blog" className="back-link">← notes</Link>
+        <Link to="/blog" className="back-link">← blog</Link>
 
         <article className="post-article">
           <header className="post-header">
@@ -84,10 +84,10 @@ const BlogPostPage = ({ effectsOn }) => {
             {loading ? (
               <p style={{ color: 'var(--text-muted)' }}>Loading...</p>
             ) : (
-              <Markdown 
+              <Markdown
                 remarkPlugins={[remarkGfm]}
                 components={{
-                  code({node, inline, className, children, ...props}) {
+                  code({ node, inline, className, children, ...props }) {
                     const match = /language-(\w+)/.exec(className || '');
                     return !inline && match ? (
                       <SyntaxHighlighter

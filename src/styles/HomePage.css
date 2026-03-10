@@ -238,6 +238,7 @@
     background: radial-gradient(ellipse at bottom, var(--wave-color) 0%, transparent 60%);
     opacity: 0;
     transform-origin: bottom center;
+    will-change: transform, opacity;
 }
 
 .wave-1 {

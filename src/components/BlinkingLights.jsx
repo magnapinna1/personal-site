@@ -1,15 +1,18 @@
 import React, { useMemo } from 'react';
 
 const BlinkingLights = ({ count = 15 }) => {
+    // Cut the number of rendered lights in half on mobile to save battery
+    const actualCount = window.innerWidth < 768 ? Math.ceil(count / 2) : count;
+
     const lights = useMemo(() => {
-        return Array.from({ length: count }).map(() => ({
+        return Array.from({ length: actualCount }).map(() => ({
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
             animationDelay: `${Math.random() * 10}s`,
             animationDuration: `${Math.random() * 8 + 6}s`, // 6s to 14s
             scale: Math.random() * 0.8 + 0.5,
         }));
-    }, [count]);
+    }, [actualCount]);
 
     return (
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 4, overflow: 'hidden' }}>

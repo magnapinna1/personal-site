@@ -69,14 +69,16 @@ const BlogPage = ({ effectsOn }) => {
                     </div>
 
                     {/* Neutron Star pinned to the bottom of the content */}
-                    <a
-                        href="https://en.wikipedia.org/wiki/Ctenophora"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="neutron-star-container"
-                    >
-                        <NeutronStar />
-                    </a>
+                    {effectsOn && (
+                        <a
+                            href="https://en.wikipedia.org/wiki/Ctenophora"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="neutron-star-container"
+                        >
+                            <NeutronStar />
+                        </a>
+                    )}
                 </div>
             </div>
         </div>

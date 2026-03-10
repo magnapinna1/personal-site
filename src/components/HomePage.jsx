@@ -22,7 +22,11 @@ const generateCurvedPath = (startX, startY, length, variance) => {
 let _strands = null;
 const getStrands = () => {
   if (_strands) return _strands;
-  _strands = Array.from({ length: 30 }).map(() => {
+  
+  // Cut down count significantly on mobile to save battery
+  const strandCount = window.innerWidth < 768 ? 12 : 30;
+
+  _strands = Array.from({ length: strandCount }).map(() => {
     const startX = (Math.random() * 1.5 - 0.25) * window.innerWidth;
     const startY = Math.random() * window.innerHeight;
     const length = Math.random() * 10 + 5;
