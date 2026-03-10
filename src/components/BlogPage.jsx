@@ -4,7 +4,7 @@ import { getAllPosts } from '@content/posts';
 import NeutronStar from './NeutronStar';
 import '../styles/BlogPage.css';
 
-const BlogPage = () => {
+const BlogPage = ({ effectsOn }) => {
     const navigate = useNavigate();
     const wrapperRef = useRef(null);
 
@@ -12,16 +12,17 @@ const BlogPage = () => {
         const wrapper = wrapperRef.current;
         if (!wrapper) return;
 
+        const scrollContainer = wrapper.closest('.page-section') || window;
+
         const handleScroll = () => {
-            // Maps scroll position to a custom property for CSS rendering
-            wrapper.style.setProperty('--scroll-offset', `${wrapper.scrollTop}px`);
+            const offset = scrollContainer === window ? window.scrollY : scrollContainer.scrollTop;
+            wrapper.style.setProperty('--scroll-offset', `${offset}px`);
         };
 
-        wrapper.addEventListener('scroll', handleScroll, { passive: true });
-        // Initialize immediately
+        scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
         handleScroll();
 
-        return () => wrapper.removeEventListener('scroll', handleScroll);
+        return () => scrollContainer.removeEventListener('scroll', handleScroll);
     }, []);
 
     const posts = getAllPosts();
@@ -55,27 +56,27 @@ const BlogPage = () => {
     return (
         <div className="blog-wrapper">
             <div className="space-bg">
-                <div className="space-stars deep-stars"></div>
-                <div className="space-stars mid-stars"></div>
-                <div className="space-nebula nebula-a"></div>
-                <div className="space-nebula nebula-b"></div>
+                <div className={`space-nebula nebula-a ${effectsOn ? '' : 'effects-off'}`}></div>
+                <div className={`space-nebula nebula-b ${effectsOn ? '' : 'effects-off'}`}></div>
+                <div className={`space-nebula nebula-c ${effectsOn ? '' : 'effects-off'}`}></div>
                 <div className="space-grain"></div>
             </div>
             <div className="blog-content-wrapper full-screen-scroll" ref={wrapperRef}>
                 <div className="section-content">
-                    <h2 className="page-title">Notes</h2>
-                    <div className="blog-list" style={{ paddingBottom: '30vh', position: 'relative', zIndex: 10 }}>
+                    <h2 className="page-title">Blog</h2>
+                    <div className="blog-list" style={{ paddingBottom: 'max(30vh, 320px)', position: 'relative', zIndex: 10 }}>
                         {listcontent}
                     </div>
 
                     {/* Neutron Star pinned to the bottom of the content */}
-                    <div
+                    <a
+                        href="https://en.wikipedia.org/wiki/Ctenophora"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="neutron-star-container"
-                        style={{ position: 'absolute', bottom: 0, left: '-10vh', width: '100%', height: '40vh', rotate: '-45deg', overflow: 'hidden', cursor: 'pointer', zIndex: 0 }}
-                        onClick={() => window.open("https://en.wikipedia.org/wiki/Ctenophora", "_blank", "noopener")}
                     >
                         <NeutronStar />
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>

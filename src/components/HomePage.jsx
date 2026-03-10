@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import '../styles/HomePage.css';
+import BackgroundStars from './BackgroundStars';
 
 const generateCurvedPath = (startX, startY, length, variance) => {
   let d = `M ${startX} ${startY}`;
@@ -17,22 +18,6 @@ const generateCurvedPath = (startX, startY, length, variance) => {
   return d;
 };
 
-const starColors = ['#aabfff', '#cad8ff', '#f8f7ff', '#fff4e8', '#ffd2a1', '#ffcc6f', '#ffa94d'];
-
-const CONSTANT_STARS = Array.from({ length: 120 }).map(() => {
-  const color = starColors[Math.floor(Math.random() * starColors.length)];
-  const size = Math.random() * 1.5 + 0.5;
-  return {
-    left: `${Math.random() * 100}%`,
-    top: `${Math.random() * 100}%`,
-    animationDelay: `${Math.random() * 5}s`,
-    animationDuration: `${Math.random() * 3 + 2}s`,
-    width: `${size}px`,
-    height: `${size}px`,
-    backgroundColor: color,
-    boxShadow: `0 0 ${size * 3}px ${color}`,
-  };
-});
 
 let _strands = null;
 const getStrands = () => {
@@ -57,28 +42,6 @@ const getStrands = () => {
   return _strands;
 };
 
-const PulsingWaves = () => (
-  <div className="wave-container">
-    <div className="wave wave-1"></div>
-    <div className="wave wave-2"></div>
-    <div className="wave wave-3"></div>
-  </div>
-);
-
-const DarkClouds = () => (
-  <div className="clouds-container">
-    <div className="cloud-layer cloud-back"></div>
-    <div className="cloud-layer cloud-front"></div>
-  </div>
-);
-
-const HiddenStars = () => (
-  <div className="stars-container">
-    {CONSTANT_STARS.map((style, i) => (
-      <div key={`star-${i}`} className="star" style={style}></div>
-    ))}
-  </div>
-);
 
 const CombJelliesSVG = () => (
   <div className="jelly-container">
@@ -112,14 +75,12 @@ const CombJelliesSVG = () => (
 const HomePage = ({ effectsOn, mousePos }) => (
   <div className="portfolio-wrapper">
     <div className="effects-layer mouse-reveal" style={{ opacity: effectsOn ? 1 : 0, transition: 'opacity 0.8s ease' }}>
-      <HiddenStars /><CombJelliesSVG />
+      <BackgroundStars /><CombJelliesSVG />
     </div>
-    <div className="interactive-glow" style={{ opacity: effectsOn ? 1 : 0, transition: 'opacity 0.8s ease', background: `radial-gradient(600px circle at var(--m-x) var(--m-y), rgba(42, 69, 100, 0.15), transparent 60%)`, boxShadow: `inset 0 0 100px rgba(188, 250, 255, 0.05)`, filter: `hue-rotate(${mousePos.x % 360}deg)` }}></div>
-    <div style={{ opacity: effectsOn ? 1 : 0, transition: 'opacity 0.8s ease' }}>
-      <DarkClouds /><PulsingWaves />
-    </div>
+    <div className="interactive-glow" style={{ opacity: effectsOn ? 1 : 0, transition: 'opacity 0.8s ease', background: `radial-gradient(350px circle at var(--m-x) var(--m-y), rgba(42, 138, 106, 0.15), transparent 60%)`, boxShadow: `inset 0 0 100px rgba(188, 250, 255, 0.05)` }}></div>
+    <div className={`bottom-ambient-gradient ${effectsOn ? '' : 'effects-off'}`}></div>
     <main className="main-content">
-      <div className="glass-card">
+      <div className="glass-card" style={{ backdropFilter: effectsOn ? 'blur(14px)' : 'none', WebkitBackdropFilter: effectsOn ? 'blur(14px)' : 'none', transition: 'backdrop-filter 0.8s ease' }}>
         <div className="card-inner">
           <div className="left-column">
             <div className="profile-frame"><img src="./20230328_152422.jpg" alt="Profile Pic" className="profile-pic" /></div>
@@ -133,7 +94,7 @@ const HomePage = ({ effectsOn, mousePos }) => (
             <header className="header-group">
               <h1 className="name-title">Michael Morrill</h1>
               <div className="separator"></div>
-              <h2 className="role-title">Security Software Engineer</h2>
+              <h2 className="role-title">Software Engineer</h2>
             </header>
             <div className="bio-content">
               <p>I'm a Software Engineer working in Cybersecurity at JPMorganChase. I mainly use Python and Java to build cool stuff.</p>
@@ -142,15 +103,14 @@ const HomePage = ({ effectsOn, mousePos }) => (
             <div className="skills-section">
               <h3 className="section-label">Core Expertise</h3>
               <div className="skills-list">
-                <span className="skill-tag">Java</span>
+                <span className="skill-tag">Java (Spring)</span>
                 <span className="skill-tag">Python (FastAPI)</span>
                 <span className="skill-tag">Docker</span>
                 <span className="skill-tag">Kubernetes</span>
                 <span className="skill-tag">AWS (EKS, DynamoDB, Lambda)</span>
                 <span className="skill-tag">Apache Spark</span>
-                <span className="skill-tag">Spring Boot</span>
                 <span className="skill-tag">Terraform</span>
-                <span className="skill-tag">Qualys / Security</span>
+                <span className="skill-tag">Qualys</span>
                 <span className="skill-tag">Not Leetcode</span>
               </div>
             </div>

@@ -36,7 +36,8 @@
     "build:public": "cross-env USE_DUMMY_CONTENT=true vite build",
     "test": "vitest run",
     "test:watch": "vitest",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "dev:lan": "vite --host"
   },
   "browserslist": {
     "production": [

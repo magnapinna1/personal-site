@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../styles/SideNav.css';
 
-const SideNav = () => {
+const SideNav = ({ effectsOn, setEffectsOn }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const pages = [
@@ -26,6 +26,16 @@ const SideNav = () => {
           </div>
         );
       })}
+      
+      {/* Integrated Ambiance Toggle */}
+      <div 
+        className={`nav-item ${effectsOn ? 'active' : ''}`} 
+        onClick={() => setEffectsOn(prev => !prev)}
+        style={{ marginTop: '20px' }}
+      >
+        <span className="nav-label">Ambiance</span>
+        <div className="nav-dot" style={{ borderRadius: '50%', height: effectsOn ? '12px' : '8px', width: effectsOn ? '12px' : '8px' }}></div>
+      </div>
     </nav>
   );
 };

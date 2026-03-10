@@ -11,84 +11,50 @@ function AppContent() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [effectsOn, setEffectsOn] = useState(true);
   const location = useLocation();
-  
-  const lastBlogPath = React.useRef(location.pathname.startsWith('/blog') ? location.pathname : '/blog');
-  if (location.pathname.startsWith('/blog')) {
-    lastBlogPath.current = location.pathname;
-  }
-  
-  const isPath = (target) => {
-    const current = location.pathname.toLowerCase();
-    if (target === '/') return current === '/';
-    return current.startsWith(target.toLowerCase());
-  };
 
   const currentPage = location.pathname === '/' ? 'home' : location.pathname.replace('/', '').split('/')[0];
 
   useEffect(() => {
-    const isBlogPath = (path) => path.toLowerCase().startsWith('/blog');
-
-    const handleMouseMove = (e) => setMousePos({ x: e.clientX, y: e.clientY });
-    const preventDefault = (e) => {
-      if (isBlogPath(location.pathname)) return; 
-      if (e.target.closest('.scrollable-content')) return;
-      e.preventDefault();
+    const handleMouseMove = (e) => setMousePos({ x: e.pageX, y: e.pageY });
+    const handleTouchMove = (e) => {
+      if (e.touches && e.touches.length > 0) {
+        setMousePos({ x: e.touches[0].pageX, y: e.touches[0].pageY });
+      }
     };
-    const preventKeys = (e) => {
-      const keys = ['ArrowUp', 'ArrowDown', ' ', 'PageUp', 'PageDown', 'Home', 'End'];
-      if (isBlogPath(location.pathname) || e.target.closest('.scrollable-content')) return;
-      if (keys.includes(e.key)) e.preventDefault();
-    };
-
+    const handleTouchEnd = () => {
+      // Clear glow effect by moving it way off screen when touch ends
+      setMousePos({ x: -9999, y: -9999 });
+    }
+    
     window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('wheel', preventDefault, { passive: false });
-    window.addEventListener('touchmove', preventDefault, { passive: false });
-    window.addEventListener('keydown', preventKeys);
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('wheel', preventDefault);
-      window.removeEventListener('touchmove', preventDefault);
-      window.removeEventListener('keydown', preventKeys);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [location.pathname]);
+  }, []);
 
-  // Global Scroll Reset safety
+  // Global Scroll Reset safety on route change
   useEffect(() => {
-    const activeSection = document.querySelector('.page-section.active');
-    if (activeSection) {
-      activeSection.scrollTop = 0;
-    }
+    window.scrollTo(0, 0);
   }, [location.pathname]);
 
   return (
     <div className={`app-root theme-${currentPage}`} style={{ '--m-x': `${mousePos.x}px`, '--m-y': `${mousePos.y}px` }}>
-      <SideNav />
-      <button className="effects-toggle" onClick={() => setEffectsOn(prev => !prev)} title={effectsOn ? "Disable Effects" : "Enable Effects"}>
-        {effectsOn ? "[ AMBIANCE: ON ]" : "[ AMBIANCE: OFF ]"}
-      </button>
+      <SideNav effectsOn={effectsOn} setEffectsOn={setEffectsOn} />
 
-      <div className="page-wrapper">
-        <section id="home" className={`page-section ${isPath('/') ? 'active' : ''}`}>
-          <HomePage effectsOn={effectsOn} mousePos={mousePos} />
-        </section>
-        <section id="projects" className={`page-section ${isPath('/projects') ? 'active' : ''}`}>
-          <ProjectsPage effectsOn={effectsOn} />
-        </section>
-        <section id="blog" className={`page-section ${isPath('/blog') ? 'active' : ''}`}>
-          {lastBlogPath.current === '/blog' || lastBlogPath.current === '/blog/'
-            ? <BlogPage effectsOn={effectsOn} isActive={isPath('/blog')} />
-            : <BlogPostPage effectsOn={effectsOn} />
-          }
-        </section>
-      </div>
-
-      <Routes>
-        <Route path="/" element={null} />
-        <Route path="/projects" element={null} />
-        <Route path="/blog/*" element={null} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+      <main className={`page-scroll-container ${effectsOn ? 'page-transition-enabled' : ''}`} key={location.pathname}>
+        <Routes>
+          <Route path="/" element={<HomePage effectsOn={effectsOn} mousePos={mousePos} />} />
+          <Route path="/projects" element={<ProjectsPage effectsOn={effectsOn} />} />
+          <Route path="/blog" element={<BlogPage effectsOn={effectsOn} isActive={true} />} />
+          <Route path="/blog/*" element={<BlogPostPage effectsOn={effectsOn} />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </main>
     </div>
   );
 }

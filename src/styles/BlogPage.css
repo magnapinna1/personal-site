@@ -5,7 +5,6 @@
     position: relative;
     width: 100vw;
     min-height: 100vh;
-    background: #06070c;
     display: block;
     overflow-y: visible;
 }
@@ -20,79 +19,54 @@
     background: radial-gradient(ellipse at 50% 90%, #0e1028 0%, #06070c 55%);
 }
 
-/* ---- STAR LAYERS ---- */
-.space-stars {
-    position: absolute;
-    top: -10%; left: 0;
-    width: 100%; height: 120%;
-    z-index: 1;
-    will-change: transform;
-}
-
-.deep-stars {
-    background-image:
-        radial-gradient(0.8px 0.8px at 8% 15%, rgba(255,255,255,0.35) 50%, transparent 100%),
-        radial-gradient(0.5px 0.5px at 25% 40%, rgba(255,255,255,0.2) 50%, transparent 100%),
-        radial-gradient(0.8px 0.8px at 42% 8%, rgba(220,225,255,0.3) 50%, transparent 100%),
-        radial-gradient(0.5px 0.5px at 55% 55%, rgba(255,255,255,0.15) 50%, transparent 100%),
-        radial-gradient(0.8px 0.8px at 70% 25%, rgba(255,250,240,0.25) 50%, transparent 100%),
-        radial-gradient(0.5px 0.5px at 88% 65%, rgba(255,255,255,0.2) 50%, transparent 100%),
-        radial-gradient(0.8px 0.8px at 15% 80%, rgba(200,210,255,0.3) 50%, transparent 100%),
-        radial-gradient(0.5px 0.5px at 62% 90%, rgba(255,255,255,0.15) 50%, transparent 100%),
-        radial-gradient(0.5px 0.5px at 95% 10%, rgba(255,255,255,0.2) 50%, transparent 100%),
-        radial-gradient(0.8px 0.8px at 35% 70%, rgba(255,245,230,0.25) 50%, transparent 100%);
-    background-size: 400px 500px, 350px 450px, 500px 400px, 300px 380px,
-                     450px 350px, 380px 500px, 420px 380px, 350px 420px,
-                     500px 450px, 400px 350px;
-    background-position: center calc(var(--scroll-offset, 0px) * 0.15);
-}
-
-.mid-stars {
-    background-image:
-        radial-gradient(1px 1px at 18% 22%, rgba(255,255,255,0.6) 50%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 45% 15%, rgba(200,210,255,0.5) 50%, transparent 100%),
-        radial-gradient(1px 1px at 72% 38%, rgba(255,255,255,0.45) 50%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 30% 62%, rgba(255,245,220,0.5) 50%, transparent 100%),
-        radial-gradient(1px 1px at 85% 75%, rgba(220,220,255,0.4) 50%, transparent 100%),
-        radial-gradient(1px 1px at 12% 48%, rgba(255,255,255,0.35) 50%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 58% 82%, rgba(255,250,240,0.45) 50%, transparent 100%),
-        radial-gradient(1px 1px at 92% 28%, rgba(200,215,255,0.5) 50%, transparent 100%);
-    background-size: 300px 350px, 250px 300px, 350px 280px, 280px 320px,
-                     320px 380px, 380px 280px, 260px 340px, 340px 260px;
-    background-position: center calc(var(--scroll-offset, 0px) * 0.35);
-}
-
 /* ---- NEBULA CLOUDS ---- */
 .space-nebula {
     position: absolute;
     border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.3;
-    will-change: transform;
+    filter: blur(80px);
+    will-change: transform, opacity;
+    transition: opacity 0.8s ease;
+}
+
+.space-nebula.effects-off {
+    animation: none;
+    opacity: 0 !important;
 }
 
 .nebula-a {
-    width: 80vw; height: 50vh;
-    top: -10%; right: -15%;
-    background: radial-gradient(ellipse, rgba(60, 30, 110, 0.3) 0%, rgba(40, 20, 80, 0.1) 40%, transparent 65%);
-    animation: nebulaDrift1 55s ease-in-out infinite alternate;
+    width: 45vw; height: 45vh;
+    top: 5%; right: 5%;
+    background: radial-gradient(circle, rgba(140, 40, 180, 0.55) 0%, transparent 65%);
+    animation: nebulaDrift1 20s ease-in-out infinite alternate;
 }
 
 .nebula-b {
-    width: 60vw; height: 45vh;
-    bottom: -5%; left: -10%;
-    background: radial-gradient(ellipse, rgba(20, 40, 90, 0.25) 0%, rgba(15, 25, 60, 0.08) 45%, transparent 65%);
-    animation: nebulaDrift2 65s ease-in-out infinite alternate;
+    width: 50vw; height: 40vh;
+    bottom: 5%; left: 5%;
+    background: radial-gradient(circle, rgba(40, 100, 200, 0.5) 0%, transparent 65%);
+    animation: nebulaDrift2 25s ease-in-out infinite alternate;
+}
+
+.nebula-c {
+    width: 35vw; height: 35vh;
+    top: 40%; left: 30%;
+    background: radial-gradient(circle, rgba(200, 50, 120, 0.4) 0%, transparent 65%);
+    animation: nebulaDrift3 30s ease-in-out infinite alternate;
 }
 
 @keyframes nebulaDrift1 {
-    0%   { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(-4vw, 3vh) scale(1.05); }
+    0%   { transform: translate(0, 0) scale(0.9); opacity: 0.4; }
+    100% { transform: translate(-8vw, 8vh) scale(1.1); opacity: 0.9; }
 }
 
 @keyframes nebulaDrift2 {
-    0%   { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(3vw, -2vh) scale(1.03); }
+    0%   { transform: translate(0, 0) scale(0.9); opacity: 0.4; }
+    100% { transform: translate(10vw, -8vh) scale(1.05); opacity: 0.8; }
+}
+
+@keyframes nebulaDrift3 {
+    0%   { transform: translate(0, 0) scale(0.9); opacity: 0.3; }
+    100% { transform: translate(6vw, 10vh) scale(1.15); opacity: 0.7; }
 }
 
 /* Grain overlay */
@@ -165,4 +139,23 @@
 .blog-post-card:hover .card-tag {
     border-color: rgba(120, 100, 200, 0.15);
     color: rgba(200, 180, 255, 0.6);
+}
+
+.neutron-star-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 300px;
+    z-index: 20;
+    display: block;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .neutron-star-container {
+        bottom: 90px;
+    }
 }

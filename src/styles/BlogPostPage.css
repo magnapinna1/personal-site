@@ -74,6 +74,9 @@
     color: var(--text-muted);
     text-decoration: none;
     margin-bottom: 3rem;
+    padding: 15px 20px;
+    margin-left: -20px;
+    margin-top: -15px;
     transition: color 0.3s ease;
 }
 

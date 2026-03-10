@@ -39,7 +39,7 @@ const NeutronStar = () => {
         speed: 0.5 + Math.random() * 1.0,
         width: 2.5 + Math.random() * 5,
         spiralRate: 0.018 + Math.random() * 0.014,
-        length: 0.35 + Math.random() * 0.2,
+        length: 0.5 + Math.random() * 0.3,
         hueBase: 210 + Math.random() * 30,
         opacity: 0.12 + Math.random() * 0.18,
         // Shared wave properties — synced across both jets
@@ -55,7 +55,7 @@ const NeutronStar = () => {
       const w = W();
       const h = H();
       const cx = w * 0.5;
-      const cy = h * 0.85;
+      const cy = h * 0.5;
 
       ctx.clearRect(0, 0, w, h);
       time += 0.014;
@@ -64,6 +64,18 @@ const NeutronStar = () => {
       ctx.translate(cx, cy);
       ctx.rotate(TILT);
       ctx.translate(-cx, -cy);
+
+      // Deep Space Plasma Glow (Replacing the CSS Nebulas)
+      const plasmaPulse = Math.sin(time * 0.5) * 0.15 + 0.85; // Breathes between 0.7 and 1.0 opacity multiplier
+      const bgGlow = ctx.createRadialGradient(cx, cy, 0, cx, cy, w * 0.8);
+      bgGlow.addColorStop(0, `rgba(40, 60, 110, ${0.4 * plasmaPulse})`);
+      bgGlow.addColorStop(0.3, `rgba(20, 30, 80, ${0.2 * plasmaPulse})`);
+      bgGlow.addColorStop(0.8, 'transparent');
+      
+      ctx.fillStyle = bgGlow;
+      ctx.beginPath();
+      ctx.arc(cx, cy, w * 0.8, 0, Math.PI * 2);
+      ctx.fill();
 
       for (const stream of streams) {
         const spiralOffset = -time * stream.speed + stream.phase;

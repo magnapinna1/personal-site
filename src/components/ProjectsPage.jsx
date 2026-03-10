@@ -1,8 +1,9 @@
 import React from 'react';
 import '../styles/ProjectsPage.css';
+import BlinkingLights from './BlinkingLights';
 
 const ProjectsPage = ({ effectsOn }) => (
-  <div className="project-wrapper">
+  <div className={`project-wrapper ${effectsOn ? '' : 'effects-off'}`}>
     {/* Abstract atmospheric layers */}
     <div className="proj-atmosphere" style={{ opacity: effectsOn ? 1 : 0, transition: 'opacity 1.2s ease' }}>
       <div className="murk-layer murk-1"></div>
@@ -11,9 +12,10 @@ const ProjectsPage = ({ effectsOn }) => (
       <div className="distant-warmth"></div>
       <div className="proj-fog"></div>
       <div className="proj-grain"></div>
+      <BlinkingLights />
     </div>
     <div className="section-content">
-      <h2 className="page-title">Selected Work</h2>
+      <h2 className="page-title">Projects and Experience</h2>
       <div className="project-grid">
         <div className="project-item">
           <h3>Vulerability Scanning Audit Automation</h3>
