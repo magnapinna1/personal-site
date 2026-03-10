@@ -10,12 +10,8 @@ import SideNav from './components/SideNav';
 function AppContent() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [effectsOn, setEffectsOn] = useState(() => {
-    // Try to load user preference from local storage, default to true if missing
     const saved = localStorage.getItem('ambiance_effects');
-    if (saved !== null) {
-      return JSON.parse(saved);
-    }
-    return true;
+    return saved !== null ? JSON.parse(saved) : true;
   });
   const location = useLocation();
 
@@ -37,7 +33,7 @@ function AppContent() {
       // Clear glow effect by moving it way off screen when touch ends
       setMousePos({ x: -9999, y: -9999 });
     }
-    
+
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('touchmove', handleTouchMove, { passive: true });
     window.addEventListener('touchend', handleTouchEnd);
@@ -62,7 +58,7 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<HomePage effectsOn={effectsOn} mousePos={mousePos} />} />
           <Route path="/projects" element={<ProjectsPage effectsOn={effectsOn} />} />
-          <Route path="/blog" element={<BlogPage effectsOn={effectsOn} isActive={true} />} />
+          <Route path="/blog" element={<BlogPage effectsOn={effectsOn} />} />
           <Route path="/blog/*" element={<BlogPostPage effectsOn={effectsOn} />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

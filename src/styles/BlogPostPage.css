@@ -29,6 +29,13 @@
     border-radius: 50%;
     filter: blur(120px);
     opacity: 0.4;
+    will-change: transform;
+    transition: opacity 0.8s ease;
+}
+
+.post-nebula.effects-off {
+    animation: none;
+    opacity: 0 !important;
 }
 
 .nebula-1 {

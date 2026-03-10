@@ -94,7 +94,6 @@ const NeutronStar = () => {
           const spiralRadius = t * t * 70;
 
           // Wave: sinusoidal offset perpendicular to jet axis, grows with distance
-          // Wave: grows with distance from core
           const wave = Math.sin(time * stream.waveFreq + t * 6 + stream.wavePhase) * stream.waveAmp * t;
 
           const px = cx + Math.cos(spiralAngle) * spiralRadius + wave;

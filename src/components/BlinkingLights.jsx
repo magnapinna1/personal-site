@@ -32,15 +32,6 @@ const BlinkingLights = ({ count = 15 }) => {
                     opacity: 0, // Starts invisible
                 }}></div>
             ))}
-            <style>
-                {`
-                    @keyframes blinkLight {
-                        0%, 15% { opacity: 0; transform: scale(0.8) translateY(0px); }
-                        50%     { opacity: 0.5; transform: scale(1.4) translateY(-8px); }
-                        85%, 100% { opacity: 0; transform: scale(0.8) translateY(-16px); }
-                    }
-                `}
-            </style>
         </div>
     );
 };

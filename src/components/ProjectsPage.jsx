@@ -18,20 +18,16 @@ const ProjectsPage = ({ effectsOn }) => (
       <h2 className="page-title">Projects and Experience</h2>
       <div className="project-grid">
         <div className="project-item">
-          <h3>Vulerability Scanning Audit Automation</h3>
-          <p>Python FastAPI + React app to automate Qualys audit evidence gathering and reporting. I save our engineering teams lots of time on an otherwise very tedious process.</p>
+          <h3>Vulnerability Scanning Audit Automation</h3>
+          <p>Python FastAPI + React app automating Qualys audit evidence gathering and reporting. Saves engineering teams hours of otherwise manual work.</p>
         </div>
         <div className="project-item">
           <h3>Data Platform Transformation Library</h3>
-          <p>Java + Apache Spark transformation libraries powering internal data platform processing billions of records for multiple lending products. I helped build the data backend for Chase Pay-In-4!</p>
+          <p>Java + Apache Spark transformation libraries powering an internal data platform that processes billions of records for multiple lending products. Built the data backend for Chase Pay-In-4.</p>
         </div>
         <div className="project-item">
           <h3>This website</h3>
-          <p>React + Tailwind CSS + Vite + GitHub Pages + Claude</p>
-        </div>
-        <div className="project-item">
-          <h3>Super Smash / Super Mario Bros Game</h3>
-          <p>C# + Monogame. I worked with a team to build a Smash style game within Super Mario Bros.</p>
+          <p>React + Vanilla CSS + Vite + GitHub Pages + Claude</p>
         </div>
       </div>
     </div>

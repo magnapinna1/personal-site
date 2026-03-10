@@ -22,7 +22,7 @@ const generateCurvedPath = (startX, startY, length, variance) => {
 let _strands = null;
 const getStrands = () => {
   if (_strands) return _strands;
-  
+
   // Cut down count significantly on mobile to save battery
   const strandCount = window.innerWidth < 768 ? 12 : 30;
 
@@ -47,7 +47,29 @@ const getStrands = () => {
 };
 
 
-const CombJelliesSVG = () => (
+const CombJelliesSVG = () => {
+  const strands = useMemo(() => {
+    const strandCount = window.innerWidth < 768 ? 12 : 30;
+    return Array.from({ length: strandCount }).map(() => {
+      const startX = (Math.random() * 1.5 - 0.25) * window.innerWidth;
+      const startY = Math.random() * window.innerHeight;
+      const length = Math.random() * 10 + 5;
+      const variance = 10;
+      const baseHue = Math.floor(Math.random() * 360);
+      const baseRotation = Math.random() * 360;
+      return {
+        path: generateCurvedPath(startX, startY, length, variance),
+        delay: Math.random() * 10,
+        duration: Math.random() * 5 + 6,
+        driftSpeed: Math.random() * 80 + 40,
+        driftOffset: Math.random() * 100,
+        baseHue,
+        baseRotation,
+      };
+    });
+  }, []);
+
+  return (
   <div className="jelly-container">
     <svg className="jelly-svg" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -56,7 +78,7 @@ const CombJelliesSVG = () => (
           <feMerge><feMergeNode in="coloredBlur" /><feMergeNode in="SourceGraphic" /></feMerge>
         </filter>
       </defs>
-      {getStrands().map((strand, i) => (
+      {strands.map((strand, i) => (
         <g key={`strand-group-${i}`} className="drifting-group" style={{
           animationDuration: `${strand.driftSpeed}s`,
           animationDelay: `-${strand.driftOffset}s`,
@@ -74,7 +96,8 @@ const CombJelliesSVG = () => (
       ))}
     </svg>
   </div>
-);
+  );
+};
 
 const HomePage = ({ effectsOn, mousePos }) => (
   <div className="portfolio-wrapper">

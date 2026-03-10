@@ -31,6 +31,19 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <!-- GitHub Pages SPA redirect receiver: restores the path from the 404 redirect -->
+    <script>
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var path = params.get('p');
+        if (path) {
+          var query = params.get('q') ? '?' + params.get('q').replace(/~and~/g, '&') : '';
+          window.history.replaceState(
+            null, null, '/' + path.replace(/~and~/g, '&') + query + window.location.hash
+          );
+        }
+      })();
+    </script>
     <div id="root"></div>
     <!--
       This HTML file is a template.

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAllPosts } from '@content/posts';
 import NeutronStar from './NeutronStar';
@@ -6,24 +6,6 @@ import '../styles/BlogPage.css';
 
 const BlogPage = ({ effectsOn }) => {
     const navigate = useNavigate();
-    const wrapperRef = useRef(null);
-
-    useEffect(() => {
-        const wrapper = wrapperRef.current;
-        if (!wrapper) return;
-
-        const scrollContainer = wrapper.closest('.page-section') || window;
-
-        const handleScroll = () => {
-            const offset = scrollContainer === window ? window.scrollY : scrollContainer.scrollTop;
-            wrapper.style.setProperty('--scroll-offset', `${offset}px`);
-        };
-
-        scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
-        handleScroll();
-
-        return () => scrollContainer.removeEventListener('scroll', handleScroll);
-    }, []);
 
     const posts = getAllPosts();
     let listcontent;
@@ -61,7 +43,7 @@ const BlogPage = ({ effectsOn }) => {
                 <div className={`space-nebula nebula-c ${effectsOn ? '' : 'effects-off'}`}></div>
                 <div className="space-grain"></div>
             </div>
-            <div className="blog-content-wrapper full-screen-scroll" ref={wrapperRef}>
+            <div className="blog-content-wrapper full-screen-scroll">
                 <div className="section-content">
                     <h2 className="page-title">Blog</h2>
                     <div className="blog-list" style={{ paddingBottom: 'max(30vh, 320px)', position: 'relative', zIndex: 10 }}>

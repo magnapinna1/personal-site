@@ -62,8 +62,8 @@ const BlogPostPage = ({ effectsOn }) => {
   return (
     <div className="post-page-wrapper">
       <div className="post-bg" style={{ opacity: effectsOn ? 1 : 0, transition: 'opacity 1.2s ease' }}>
-        <div className="post-nebula nebula-1"></div>
-        <div className="post-nebula nebula-2"></div>
+        <div className={`post-nebula nebula-1 ${effectsOn ? '' : 'effects-off'}`}></div>
+        <div className={`post-nebula nebula-2 ${effectsOn ? '' : 'effects-off'}`}></div>
         <div className="post-grain"></div>
       </div>
       <div className="section-content full-screen-scroll">
