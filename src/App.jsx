@@ -9,8 +9,20 @@ import SideNav from './components/SideNav';
 
 function AppContent() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [effectsOn, setEffectsOn] = useState(true);
+  const [effectsOn, setEffectsOn] = useState(() => {
+    // Try to load user preference from local storage, default to true if missing
+    const saved = localStorage.getItem('ambiance_effects');
+    if (saved !== null) {
+      return JSON.parse(saved);
+    }
+    return true;
+  });
   const location = useLocation();
+
+  // Persist the ambiance toggle state whenever it changes
+  useEffect(() => {
+    localStorage.setItem('ambiance_effects', JSON.stringify(effectsOn));
+  }, [effectsOn]);
 
   const currentPage = location.pathname === '/' ? 'home' : location.pathname.replace('/', '').split('/')[0];
 

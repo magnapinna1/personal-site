@@ -26,12 +26,11 @@
 
 .nav-label {
     font-family: 'Share Tech Mono', monospace;
-    font-size: 0.6rem;
+    font-size: 0.85rem;
     letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--theme-nav-text, var(--text-muted));
-    opacity: 0;
-    transform: translateX(8px);
+    opacity: 0.5;
     transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
     pointer-events: none;
 }
@@ -46,8 +45,7 @@
 }
 
 .nav-item:hover .nav-label {
-    opacity: 0.5;
-    transform: translateX(0);
+    opacity: 0.8;
 }
 
 .nav-item:hover .nav-dot {
@@ -64,9 +62,8 @@
 }
 
 .nav-item.active .nav-label {
-    opacity: 0.9;
+    opacity: 1;
     color: var(--text-main);
-    transform: translateX(0);
 }
 @media (max-width: 768px) {
     .side-nav {
@@ -111,7 +108,7 @@
         display: block;
         opacity: 0.6;
         transform: none;
-        font-size: 0.55rem;
+        font-size: 0.65rem;
         letter-spacing: 1px;
     }
 
