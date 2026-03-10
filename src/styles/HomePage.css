@@ -331,7 +331,7 @@
     border-radius: 50%;
     filter: grayscale(0.2) contrast(1.1) brightness(0.9);
     transition: transform 0.5s ease;
-    transform: scale(1.28) translate(-5%, 0%);
+    transform: scale(1.15) translate(0%, 5%);
     /* Controls Zoom and Pan */
 }
 

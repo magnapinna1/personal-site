@@ -110,7 +110,7 @@ const HomePage = ({ effectsOn, mousePos }) => (
       <div className="glass-card" style={{ backdropFilter: effectsOn ? 'blur(14px)' : 'none', WebkitBackdropFilter: effectsOn ? 'blur(14px)' : 'none', transition: 'backdrop-filter 0.8s ease' }}>
         <div className="card-inner">
           <div className="left-column">
-            <div className="profile-frame"><img src="./20230328_152422.jpg" alt="Profile Pic" className="profile-pic" /></div>
+            <div className="profile-frame"><img src="./1668561727021.jpg" alt="Profile Pic" className="profile-pic" /></div>
             <nav className="links-nav">
               <a href="https://github.com/magnapinna1" className="nav-link">Github</a>
               <a href="https://www.linkedin.com/in/michael-morrill-591736177/" className="nav-link">LinkedIn</a>
