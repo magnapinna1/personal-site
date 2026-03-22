@@ -16,7 +16,7 @@ const BlogPage = ({ effectsOn }) => {
                 <div
                     key={post.slug}
                     className="blog-post-card"
-                    onClick={() => navigate(`/blog/${post.slug}`)}
+                    onClick={() => navigate(`/words/${post.slug}`)}
                     style={{ cursor: 'pointer' }}
                 >
                     <span className="post-date">{post.date}</span>
@@ -45,7 +45,7 @@ const BlogPage = ({ effectsOn }) => {
             </div>
             <div className="blog-content-wrapper full-screen-scroll">
                 <div className="section-content">
-                    <h2 className="page-title">Blog</h2>
+                    <h2 className="page-title">Words</h2>
                     <div className="blog-list" style={{ paddingBottom: 'max(30vh, 320px)', position: 'relative', zIndex: 10 }}>
                         {listcontent}
                     </div>

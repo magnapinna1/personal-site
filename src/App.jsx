@@ -58,8 +58,8 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<HomePage effectsOn={effectsOn} mousePos={mousePos} />} />
           <Route path="/projects" element={<ProjectsPage effectsOn={effectsOn} />} />
-          <Route path="/blog" element={<BlogPage effectsOn={effectsOn} />} />
-          <Route path="/blog/*" element={<BlogPostPage effectsOn={effectsOn} />} />
+          <Route path="/words" element={<BlogPage effectsOn={effectsOn} />} />
+          <Route path="/words/*" element={<BlogPostPage effectsOn={effectsOn} />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

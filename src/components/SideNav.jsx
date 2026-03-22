@@ -8,7 +8,7 @@ const SideNav = ({ effectsOn, setEffectsOn }) => {
   const pages = [
     { id: 'home', path: '/' },
     { id: 'projects', path: '/projects' },
-    { id: 'blog', path: '/blog' }
+    { id: 'words', path: '/words' }
   ];
 
   return (

@@ -12,9 +12,9 @@ const BlogPostPage = ({ effectsOn }) => {
   const navigate = useNavigate();
 
   // Cache the last valid slug so we don't flash "Post not found" during route transition fade-outs
-  const lastValidSlug = useRef(location.pathname.replace('/blog/', ''));
-  if (location.pathname.startsWith('/blog/')) {
-    lastValidSlug.current = location.pathname.replace('/blog/', '');
+  const lastValidSlug = useRef(location.pathname.replace('/words/', ''));
+  if (location.pathname.startsWith('/words/')) {
+    lastValidSlug.current = location.pathname.replace('/words/', '');
   }
 
   const slug = lastValidSlug.current;
@@ -51,7 +51,7 @@ const BlogPostPage = ({ effectsOn }) => {
       <div className="post-page-wrapper">
         <div className="section-content full-screen-scroll">
           <p style={{ color: 'var(--text-muted)', marginTop: '20vh' }}>Post not found.</p>
-          <Link to="/blog" className="back-link">← back to notes</Link>
+          <Link to="/words" className="back-link">← back to notes</Link>
         </div>
       </div>
     );
@@ -67,7 +67,7 @@ const BlogPostPage = ({ effectsOn }) => {
         <div className="post-grain"></div>
       </div>
       <div className="section-content full-screen-scroll">
-        <Link to="/blog" className="back-link">← blog</Link>
+        <Link to="/words" className="back-link">← words</Link>
 
         <article className="post-article">
           <header className="post-header">
@@ -119,7 +119,7 @@ const BlogPostPage = ({ effectsOn }) => {
                 <div
                   key={r.slug}
                   className="related-card"
-                  onClick={() => navigate(`/blog/${r.slug}`)}
+                  onClick={() => navigate(`/words/${r.slug}`)}
                 >
                   <span className="related-date">{r.date}</span>
                   <h4 className="related-title">{r.title}</h4>
